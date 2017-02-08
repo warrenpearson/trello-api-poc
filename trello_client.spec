@@ -11,22 +11,22 @@ end
 
 describe 'find_board' do
   it 'checks the name of a user\'s board is returned correctly' do
-    board = client.find_board('warrenpearson', 'Barclays Windows')
-    expect(board.name).to eq 'Barclays Windows'
+    board = client.find_board('warrenpearson', 'TrelloAPI Test')
+    expect(board.name).to eq 'TrelloAPI Test'
   end
 end
 
 describe 'find_list' do
   it 'checks the name of a user board\'s list is returned correctly' do
-    list = client.find_list('warrenpearson', 'Barclays Windows', 'ToDo')
+    list = client.find_list('warrenpearson', 'TrelloAPI Test', 'ToDo')
     expect(list.name).to eq 'ToDo'
   end
 end
 
 describe 'find_card' do
   it 'checks the name of a specific card is returned correctly' do
-    card = client.find_card('warrenpearson', 'Barclays Windows',
-                            'Blocked', 'Admin access on supermarket')
-    expect(card.name).to eq 'Admin access on supermarket'
+    card = client.find_card('warrenpearson', 'TrelloAPI Test',
+                            'ToDo', 'My first card')
+    expect(card.name).to eq 'My first card'
   end
 end
