@@ -1,4 +1,4 @@
-require_relative 'trello_client.rb'
+require_relative '../trello_client.rb'
 
 client = TrelloClient.new
 
