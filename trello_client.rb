@@ -11,50 +11,57 @@ class TrelloClient
     end
   end
 
-  def get_orgs(user)
-    u = find_user(user)
-    puts u.organizations.inspect
+  def orgs(user_name)
+    u = user(user_name)
+    u.organizations
   end
 
-  def find_user(user)
-    Trello::Member.find(user)
+  def user(user_name)
+    Trello::Member.find(user_name)
   end
 
-  def get_boards(me)
-    me.boards.each do |b|
-      puts "#{b.name} [#{b.id}]"
-    end
+  def boards(user_name)
+    u = user(user_name)
+    u.boards
   end
 
-  def find_board(user, board)
-    u = find_user(user)
-    boards = u.boards.select { |b| b.name == board }
+  def board(user_name, board_name)
+    u = user(user_name)
+    boards = u.boards.select { |b| b.name == board_name }
     boards[0]
   end
 
-  def find_list(user, board, list)
-    b = find_board(user, board)
-    lists = b.lists.select { |l| l.name == list }
+  def list(user_name, board_name, list_name)
+    b = board(user_name, board_name)
+    lists = b.lists.select { |l| l.name == list_name }
     lists[0]
   end
 
-  def find_card(user, board, list, card)
-    list = find_list(user, board, list)
-    cards = list.cards.select { |c| c.name == card }
+  def card(user_name, board_name, list_name, card_name)
+    l = list(user_name, board_name, list_name)
+    cards = l.cards.select { |c| c.name == card_name }
     cards[0]
   end
 
-  def show_lists(user, board)
-    b = find_board(user, board)
-    b.lists.each do |list|
-      puts "#{list.id}: #{list.name}"
-    end
+  def lists(user_name, board_name)
+    b = board(user_name, board_name)
+    b.lists
   end
 
-  def show_cards(board)
+  def cards(board)
     board.cards.each do |card|
       puts "#{card.id}: #{card.name}"
     end
+  end
+ 
+  def labels(user_name, board_name)
+    b = board(user_name, board_name)
+    b.labels
+  end
+
+  def members(user_name, board_name)
+    b = board(user_name, board_name)
+    b.members
   end
 
   def add_card(name, list)
